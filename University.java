@@ -8,6 +8,7 @@ public interface University {
 
   /* method: 1 */
   String recruitNewStudent(String firstName, String lastName, LocalDate birthDate);
+  String getStudentFullName (String studentId);
 
   /* method: 2 */
   String hireNewLecturer(String firstName, String lastName, LocalDate birtDate);

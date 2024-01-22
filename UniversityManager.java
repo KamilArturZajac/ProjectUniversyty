@@ -1,14 +1,61 @@
 package pl.wsb.university;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 public class UniversityManager implements University {
-
+  public List <Student> Students = new ArrayList<>();
   @Override
   public String recruitNewStudent(String firstName, String lastName, LocalDate birthDate) {
-    throw new RuntimeException("Method 1 not implemented yet!");
+    String studentId = String.valueOf(studentRandomId());
+    Student newStudent = new Student(studentId, firstName, lastName, birthDate);
+    Students.add(newStudent);
+    //if XXXX
+    return newStudent.getStudentId();
+    //else
+    //throw new RuntimeException("Method 1 not implemented yet!");
+  }
+  //Losowanie ID dla Studenta
+  private int studentRandomId() {
+    //Losowanie ID
+    int studentRandomNumber;
+    //Zakres losowanego ID
+    int min = 1;
+    int max = 9999;
+    do {
+      studentRandomNumber = (int) Math.floor(Math.random() * (max - min + 1) + min);
+    } while (isClientIdTaken(studentRandomNumber));
+
+    return studentRandomNumber;
+  }
+//Sprawdzanie czy wygenerowane ID jest wolne
+  private boolean isClientIdTaken(int studentId) {
+    //Sprawdzanie czy wylosowane ID nie jest już używane
+    for (Student student : Students) {
+      if (Students.equals(student.getStudentId())) {
+        return true;
+      }
+    }
+    return false;
+  }
+  @Override
+  public String getStudentFullName (String studentID) {
+    //Wywoływanie pełnego imienia i nazwiska studenta
+    String commentGetStudentFullName = null;
+    for (Student StudentClass : Students) {
+      if (Students.equals(StudentClass.getStudentId())) {
+        String firstName = StudentClass.getFirstName();
+        String lastName = StudentClass    .getLastName();
+        commentGetStudentFullName = studentID + " full name is " + firstName + " " + lastName;
+        break;
+      }
+      else {
+        commentGetStudentFullName = "Error - can't find this user";
+      }
+    }
+    return commentGetStudentFullName;
   }
 
   @Override
