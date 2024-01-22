@@ -26,5 +26,18 @@ public class Main {
 
         //Wywoływanie ID kursu 1
         System.out.println("ID kursu 1: " + course1);
+
+        //Dodawanie studenta 3 do kursu 1
+        universityManager.enrollStudentInCourse(student3, course1);
+        System.out.println(student3 + " is now member of course " + course1);
+
+        //Dodawanie wykładowcy 2 do kursu 1
+        universityManager.assignLecturerToCourse(lecturer2, course1);
+        System.out.println(lecturer2 + " is now leader of course " + course1);
+
+        //Sprawdzenie ilości ucześtników kursu 1
+        int numberOfCourseMembers = universityManager.getNumberOfStudentsEnrolledInCourse(course1);
+        System.out.println("Total members of course " + course1 + ": " + numberOfCourseMembers);
+
     }
 }

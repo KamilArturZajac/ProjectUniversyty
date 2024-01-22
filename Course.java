@@ -33,5 +33,5 @@ public class Course {
     public void setYear (int year) { this.year = year; }
     public void setSemester (Semester semester) { this.semester = semester; }
     public void setLeader (String leader) { this.leader = leader; }
-    public void setMembers (List members) { this.members = members; }
+    public void setMembers (String members) { this.members.add(members); }
 }

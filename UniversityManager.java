@@ -85,7 +85,7 @@ public class UniversityManager implements University {
     //throw new RuntimeException("Method 3 not implemented yet!");
     String courseId = String.valueOf(courseRandomId());
     String leader = "";
-    List <String> members = new ArrayList<String>();                                                                       //Czy to jest dobrze?
+    List <String> members = new ArrayList<String>();
     Course newCourse = new Course(courseId, name, year, semester, leader, members);
     Courses.add(newCourse);
     return newCourse.getCourseId();
@@ -117,7 +117,15 @@ public class UniversityManager implements University {
   @Override
   public void enrollStudentInCourse(String studentId, String courseId) {
     //throw new RuntimeException("Method 4 not implemented yet!");
-    
+    for (Course course : Courses) {
+      if (courseId.equals(course.getCourseId())) {
+        for (Student student : Students) {
+          if (studentId.equals(student.getStudentId())) {
+            course.setMembers(studentId);
+          } else { break; }
+        }
+      } else  { break; }
+    }
   }
 
   @Override
@@ -127,12 +135,31 @@ public class UniversityManager implements University {
 
   @Override
   public void assignLecturerToCourse(String lecturerId, String courseId) {
-    throw new RuntimeException("Method 6 not implemented yet!");
+    //throw new RuntimeException("Method 6 not implemented yet!");
+    for (Course course : Courses) {
+      if (courseId.equals(course.getCourseId())) {
+        for (Lecturer lecturer : Lecturers) {
+          if (lecturerId.equals(lecturer.getLecturerId())) {
+            course.setLeader(lecturerId);
+          } else { break; }
+        }
+      } else  { break; }
+    }
   }
 
   @Override
   public int getNumberOfStudentsEnrolledInCourse(String courseId) {
-    throw new RuntimeException("Method 7 not implemented yet!");
+    //throw new RuntimeException("Method 7 not implemented yet!");
+    int numberOfStudentsInCourse = 0;
+    for (Course course : Courses) {
+      if (courseId.equals(course.getCourseId())) {
+        for (Student student : Students) {
+          if(student.getStudentId().equals(course.getMembers()))
+            numberOfStudentsInCourse++;
+        }
+      } else  { break; }
+    }
+    return numberOfStudentsInCourse;
   }
 
   @Override
