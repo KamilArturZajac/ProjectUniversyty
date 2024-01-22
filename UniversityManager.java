@@ -149,23 +149,14 @@ public class UniversityManager implements University {
 
 @Override
 public int getNumberOfStudentsEnrolledInCourse(String courseId) {
-    int numberOfStudentsInCourse = 0;
-
     for (Course course : Courses) {
         if (courseId.equals(course.getCourseId())) {
-            for (String memberId : course.getMembers()) {
-                for (Student student : Students) {
-                    if (student.getStudentId().equals(memberId)) {
-                        numberOfStudentsInCourse++;
-                        break;  // Przerwij pętlę wewnętrzną, gdy znajdziemy pasującego studenta
-                    }
-                }
-            }
-            break;  // Przerwij pętlę zewnętrzną, gdy znajdziemy pasujący kurs
+            return course.getMembers().size();
         }
     }
 
-    return numberOfStudentsInCourse;
+    // Jeśli nie znaleziono kursu o podanym identyfikatorze, możesz obsłużyć ten przypadek, na przykład:
+    throw new RuntimeException("Course not found with courseId: " + courseId);
 }
 
   @Override
