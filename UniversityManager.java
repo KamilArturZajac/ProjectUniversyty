@@ -186,7 +186,15 @@ public int getNumberOfStudentsEnrolledInCourse(String courseId) {
 
   @Override
   public List<String> getAllCourseNamesForSummerSemesterByYear(int year) {
-    throw new RuntimeException("Method 13 not implemented yet!");
+    //throw new RuntimeException("Method 13 not implemented yet!");
+    int courseYear = year;
+    List <String> namesOfCoursesForSummerSemesterByYear = new ArrayList<>();
+    for (Course course : Courses) {
+      if (courseYear.equals(course.getYear())) {
+        namesOfCoursesForSummerSemesterByYear.add(course.getName());
+      }
+    }
+    return namesOfCoursesForSummerSemesterByYear;
   }
 
   @Override
