@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Set;
 
 public class UniversityManager implements University {
+
+  //Tworzenie studenta
   public List <Student> Students = new ArrayList<>();
   @Override
   public String recruitNewStudent(String firstName, String lastName, LocalDate birthDate) {
     String studentId = String.valueOf(studentRandomId());
     Student newStudent = new Student(studentId, firstName, lastName, birthDate);
     Students.add(newStudent);
-    //if XXXX
     return newStudent.getStudentId();
-    //else
     //throw new RuntimeException("Method 1 not implemented yet!");
   }
   //Losowanie ID dla Studenta
@@ -40,35 +40,76 @@ public class UniversityManager implements University {
     }
     return false;
   }
-  /*
-  @Override
-   public String getStudentFullName (String studentID) {
-    //Wywoływanie pełnego imienia i nazwiska studenta
-    String commentGetStudentFullName = null;
-    for (Student StudentClass : Students) {
-      if (Students.equals(StudentClass.getStudentId())) {
-        String firstName = StudentClass.getFirstName();
-        String lastName = StudentClass    .getLastName();
-        commentGetStudentFullName = studentID + " full name is " + firstName + " " + lastName;
-        break;
-      }
-      else {
-        commentGetStudentFullName = "Error - can't find this user";
-      }
-    }
-    return commentGetStudentFullName;
-  }
-  */
 
+
+
+  //Tworzenie wykładowcy
+  public List <Lecturer> Lecturers = new ArrayList<>();
   @Override
   //W poniższej metodzie pozwoliłem zmienić nazwę zmiennej z "birtDate" na "birthDate"
   public String hireNewLecturer(String firstName, String lastName, LocalDate birthDate) {
-    throw new RuntimeException("Method 2 not implemented yet!");
+    //throw new RuntimeException("Method 2 not implemented yet!");
+    String lecturerId = String.valueOf(lecturerRandomId());
+    Lecturer newLecturer = new Lecturer(lecturerId, firstName, lastName, birthDate);
+    Lecturers.add(newLecturer);
+    return newLecturer.getLecturerId();
+  }
+  //Losowanie ID dla Wykadowcy
+  private int lecturerRandomId() {
+    //Losowanie ID
+    int lecturerRandomNumber;
+    //Zakres losowanego ID
+    int min = 1;
+    int max = 9999;
+    do {
+      lecturerRandomNumber = (int) Math.floor(Math.random() * (max - min + 1) + min);
+    } while (isLecturerIdTaken(lecturerRandomNumber));
+
+    return lecturerRandomNumber;
+  }
+  //Sprawdzanie czy wygenerowane ID jest wolne
+  private boolean isLecturerIdTaken(int lecturerId) {
+    //Sprawdzanie czy wylosowane ID nie jest już używane
+    for (Lecturer lecturer : Lecturers) {
+      if (String.valueOf(lecturerId).equals(lecturer.getLecturerId())) {
+        return true;
+      }
+    }
+    return false;
   }
 
+  //Tworzenie kursu
+  public List <Course> Courses = new ArrayList<>();
   @Override
   public String openNewCourse(String name, int year, Semester semester) {
-    throw new RuntimeException("Method 3 not implemented yet!");
+    //throw new RuntimeException("Method 2 not implemented yet!");
+    String courseId = String.valueOf(courseRandomId());
+    Course newCourse = new Course(courseId, name, year, semester);
+    Courses.add(newCourse);
+    return newCourse.getCourseId();
+  }
+  //Losowanie ID dla kursu
+  private int courseRandomId() {
+    //Losowanie ID
+    int courseRandomNumber;
+    //Zakres losowanego ID
+    int min = 1;
+    int max = 9999;
+    do {
+      courseRandomNumber = (int) Math.floor(Math.random() * (max - min + 1) + min);
+    } while (isCourseIdTaken(courseRandomNumber));
+
+    return courseRandomNumber;
+  }
+  //Sprawdzanie czy wygenerowane ID jest wolne
+  private boolean isCourseIdTaken(int courseId) {
+    //Sprawdzanie czy wylosowane ID nie jest już używane
+    for (Course course : Courses) {
+      if (String.valueOf(courseId).equals(course.getCourseId())) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override
