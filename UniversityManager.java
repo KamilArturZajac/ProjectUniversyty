@@ -153,9 +153,9 @@ public int getNumberOfStudentsEnrolledInCourse(String courseId) {
 
     for (Course course : Courses) {
         if (courseId.equals(course.getCourseId())) {
-            for (String studentId : course.getMembers()) {
+            for (String memberId : course.getMembers()) {
                 for (Student student : Students) {
-                    if (student.getStudentId().equals(studentId)) {
+                    if (student.getStudentId().equals(memberId)) {
                         numberOfStudentsInCourse++;
                         break;  // Przerwij pętlę wewnętrzną, gdy znajdziemy pasującego studenta
                     }
