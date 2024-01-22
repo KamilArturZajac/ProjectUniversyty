@@ -1,6 +1,7 @@
 package pl.wsb.university;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,22 +23,30 @@ public class Main {
 
         //Tworzenie przykładowych kursów
         String course1 = universityManager.openNewCourse("Programowanie", 1, Semester.SUMMER);
-        String course2 = universityManager.openNewCourse("Matematyka", 2, Semester.WINTER);
+        String course2 = universityManager.openNewCourse("Matematyka", 1, Semester.SUMMER);
+        String course3 = universityManager.openNewCourse("Grafika", 1, Semester.WINTER);
+        String course2 = universityManager.openNewCourse("Fizyka", 2, Semester.WINTER);
 
         //Wywoływanie ID kursu 1
         System.out.println("ID kursu 1: " + course1);
 
-        //Dodawanie studenta 3 do kursu 1
+        //Dodawanie studenta 2 i 3 do kursu 1
         universityManager.enrollStudentInCourse(student3, course1);
         System.out.println(student3 + " is now member of course " + course1);
+        universityManager.enrollStudentInCourse(student2, course1);
+        System.out.println(student2 + " is now member of course " + course1);
 
         //Dodawanie wykładowcy 2 do kursu 1
         universityManager.assignLecturerToCourse(lecturer2, course1);
         System.out.println(lecturer2 + " is now leader of course " + course1);
 
-        //Sprawdzenie ilości ucześtników kursu 1
+        //Sprawdzenie ilości ucześtników kursu 1 NIE DZIAŁA
         int numberOfCourseMembers = universityManager.getNumberOfStudentsEnrolledInCourse(course1);
         System.out.println("Total members of course " + course1 + ": " + numberOfCourseMembers);
+
+        //Sprawdzanie nazw kursów występujących na pierwszym roku semestru letniego
+        List <String> allCoursesNamesForSummerSemesterByYear = universityManager.getAllCourseNamesForSummerSemesterByYear(1);
+        System.out.println("Names of summer courses in 1 year " + allCoursesNamesForSummerSemesterByYear);
 
     }
 }

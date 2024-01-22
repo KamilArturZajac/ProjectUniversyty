@@ -82,13 +82,13 @@ public class UniversityManager implements University {
   public List <Course> Courses = new ArrayList<>();
   @Override
   public String openNewCourse(String name, int year, Semester semester) {
-    //throw new RuntimeException("Method 3 not implemented yet!");
     String courseId = String.valueOf(courseRandomId());
     String leader = "";
     List <String> members = new ArrayList<String>();
     Course newCourse = new Course(courseId, name, year, semester, leader, members);
     Courses.add(newCourse);
     return newCourse.getCourseId();
+    //throw new RuntimeException("Method 3 not implemented yet!");
   }
   //Losowanie ID dla kursu
   private int courseRandomId() {
@@ -116,7 +116,6 @@ public class UniversityManager implements University {
 //Przypisywanie studenta do kursu
   @Override
   public void enrollStudentInCourse(String studentId, String courseId) {
-    //throw new RuntimeException("Method 4 not implemented yet!");
     for (Course course : Courses) {
       if (courseId.equals(course.getCourseId())) {
         for (Student student : Students) {
@@ -126,6 +125,7 @@ public class UniversityManager implements University {
         }
       } else  { break; }
     }
+    //throw new RuntimeException("Method 4 not implemented yet!");
   }
 
   @Override
@@ -135,7 +135,6 @@ public class UniversityManager implements University {
 
   @Override
   public void assignLecturerToCourse(String lecturerId, String courseId) {
-    //throw new RuntimeException("Method 6 not implemented yet!");
     for (Course course : Courses) {
       if (courseId.equals(course.getCourseId())) {
         for (Lecturer lecturer : Lecturers) {
@@ -145,19 +144,18 @@ public class UniversityManager implements University {
         }
       } else  { break; }
     }
+    //throw new RuntimeException("Method 6 not implemented yet!");
   }
 
-@Override
-public int getNumberOfStudentsEnrolledInCourse(String courseId) {
+  @Override
+  public int getNumberOfStudentsEnrolledInCourse(String courseId) {
     for (Course course : Courses) {
-        if (courseId.equals(course.getCourseId())) {
-            return course.getMembers().size();
-        }
+      if (courseId.equals(course.getCourseId())) {
+        return course.getMembers().size();
+      }
     }
-
-    // Jeśli nie znaleziono kursu o podanym identyfikatorze, możesz obsłużyć ten przypadek, na przykład:
-    throw new RuntimeException("Course not found with courseId: " + courseId);
-}
+    throw new RuntimeException("Method 7 not implemented yet!");
+  }
 
   @Override
   public int getNumberOfCoursesAssignedToLecturer(String lecturerId) {
@@ -187,10 +185,9 @@ public int getNumberOfStudentsEnrolledInCourse(String courseId) {
   @Override
   public List<String> getAllCourseNamesForSummerSemesterByYear(int year) {
     //throw new RuntimeException("Method 13 not implemented yet!");
-    int courseYear = year;
     List <String> namesOfCoursesForSummerSemesterByYear = new ArrayList<>();
     for (Course course : Courses) {
-      if (courseYear.equals(course.getYear())) {
+      if (year == course.getYear()) {
         namesOfCoursesForSummerSemesterByYear.add(course.getName());
       }
     }
