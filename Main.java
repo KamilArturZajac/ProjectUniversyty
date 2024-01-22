@@ -11,7 +11,7 @@ public class Main {
         String student3 = universityManager.recruitNewStudent("Janina", "Kowalczyk", LocalDate.of(1993, 3, 3));
 
         //Wywoływanie pełnego imienia i nazwiska studenta 1
-        String studentFullName = universityManager.getStudentFullName(student1);
-        System.out.println(studentFullName);
+        //String studentFullName = universityManager.getStudentFullName(student1);
+        //System.out.println(studentFullName);
     }
 }

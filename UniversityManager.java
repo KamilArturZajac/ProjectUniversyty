@@ -26,22 +26,23 @@ public class UniversityManager implements University {
     int max = 9999;
     do {
       studentRandomNumber = (int) Math.floor(Math.random() * (max - min + 1) + min);
-    } while (isClientIdTaken(studentRandomNumber));
+    } while (isStudentIdTaken(studentRandomNumber));
 
     return studentRandomNumber;
   }
 //Sprawdzanie czy wygenerowane ID jest wolne
-  private boolean isClientIdTaken(int studentId) {
+  private boolean isStudentIdTaken(int studentId) {
     //Sprawdzanie czy wylosowane ID nie jest już używane
     for (Student student : Students) {
-      if (Students.equals(student.getStudentId())) {
+      if (String.valueOf(studentId).equals(student.getStudentId())) {
         return true;
       }
     }
     return false;
   }
+  /*
   @Override
-  public String getStudentFullName (String studentID) {
+   public String getStudentFullName (String studentID) {
     //Wywoływanie pełnego imienia i nazwiska studenta
     String commentGetStudentFullName = null;
     for (Student StudentClass : Students) {
@@ -57,6 +58,7 @@ public class UniversityManager implements University {
     }
     return commentGetStudentFullName;
   }
+  */
 
   @Override
   //W poniższej metodzie pozwoliłem zmienić nazwę zmiennej z "birtDate" na "birthDate"
