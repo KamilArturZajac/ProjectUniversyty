@@ -147,20 +147,26 @@ public class UniversityManager implements University {
     }
   }
 
-  @Override
-  public int getNumberOfStudentsEnrolledInCourse(String courseId) {
-    //throw new RuntimeException("Method 7 not implemented yet!");
+@Override
+public int getNumberOfStudentsEnrolledInCourse(String courseId) {
     int numberOfStudentsInCourse = 0;
+
     for (Course course : Courses) {
-      if (courseId.equals(course.getCourseId())) {
-        for (Student student : Students) {
-          if(student.getStudentId().equals(course.getMembers()))
-            numberOfStudentsInCourse++;
+        if (courseId.equals(course.getCourseId())) {
+            for (String studentId : course.getMembers()) {
+                for (Student student : Students) {
+                    if (student.getStudentId().equals(studentId)) {
+                        numberOfStudentsInCourse++;
+                        break;  // Przerwij pętlę wewnętrzną, gdy znajdziemy pasującego studenta
+                    }
+                }
+            }
+            break;  // Przerwij pętlę zewnętrzną, gdy znajdziemy pasujący kurs
         }
-      } else  { break; }
     }
+
     return numberOfStudentsInCourse;
-  }
+}
 
   @Override
   public int getNumberOfCoursesAssignedToLecturer(String lecturerId) {
