@@ -11,11 +11,11 @@ public class UniversityManager implements University {
   public List <Student> Students = new ArrayList<>();
   @Override
   public String recruitNewStudent(String firstName, String lastName, LocalDate birthDate) {
+    //throw new RuntimeException("Method 1 not implemented yet!");
     String studentId = String.valueOf(studentRandomId());
     Student newStudent = new Student(studentId, firstName, lastName, birthDate);
     Students.add(newStudent);
     return newStudent.getStudentId();
-    //throw new RuntimeException("Method 1 not implemented yet!");
   }
   //Losowanie ID dla Studenta
   private int studentRandomId() {
@@ -82,9 +82,11 @@ public class UniversityManager implements University {
   public List <Course> Courses = new ArrayList<>();
   @Override
   public String openNewCourse(String name, int year, Semester semester) {
-    //throw new RuntimeException("Method 2 not implemented yet!");
+    //throw new RuntimeException("Method 3 not implemented yet!");
     String courseId = String.valueOf(courseRandomId());
-    Course newCourse = new Course(courseId, name, year, semester);
+    String leader = "";
+    List <String> members = new ArrayList<String>();                                                                       //Czy to jest dobrze?
+    Course newCourse = new Course(courseId, name, year, semester, leader, members);
     Courses.add(newCourse);
     return newCourse.getCourseId();
   }
@@ -111,10 +113,11 @@ public class UniversityManager implements University {
     }
     return false;
   }
-
+//Przypisywanie studenta do kursu
   @Override
   public void enrollStudentInCourse(String studentId, String courseId) {
-    throw new RuntimeException("Method 4 not implemented yet!");
+    //throw new RuntimeException("Method 4 not implemented yet!");
+    
   }
 
   @Override

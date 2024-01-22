@@ -21,8 +21,8 @@ public class Main {
         System.out.println("ID wykładowcy 1: " + lecturer1);
 
         //Tworzenie przykładowych kursów
-        String course1 = universityManager.openNewCourse("Programowanie", 1, SUMMER);
-        String course2 = universityManager.openNewCourse("Matematyka", 2, "Sum");
+        String course1 = universityManager.openNewCourse("Programowanie", 1, Semester.SUMMER);
+        String course2 = universityManager.openNewCourse("Matematyka", 2, Semester.WINTER);
 
         //Wywoływanie ID kursu 1
         System.out.println("ID kursu 1: " + course1);
