@@ -1,9 +1,8 @@
 package pl.wsb.university;
 
+import java.lang.reflect.Member;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class UniversityManager implements University {
 
@@ -84,7 +83,7 @@ public class UniversityManager implements University {
   public String openNewCourse(String name, int year, Semester semester) {
     String courseId = String.valueOf(courseRandomId());
     String leader = "";
-    List <String> members = new ArrayList<String>();
+    List members = Collections.singletonList("");
     Course newCourse = new Course(courseId, name, year, semester, leader, members);
     Courses.add(newCourse);
     return newCourse.getCourseId();
@@ -117,12 +116,15 @@ public class UniversityManager implements University {
   @Override
   public void enrollStudentInCourse(String studentId, String courseId) {
     for (Course course : Courses) {
-      if (courseId.equals(course.getCourseId())) {
+      if (courseId.equals(course.getCourseId())) { //IF nie wykonuje się prawidłowo i działa break w elsie
         for (Student student : Students) {
           if (studentId.equals(student.getStudentId())) {
             course.setMembers(studentId);
+            System.out.println("JAKIMŚ CUDEM DZIAŁA");
+            break;
           } else { break; }
         }
+        break;
       } else  { break; }
     }
     //throw new RuntimeException("Method 4 not implemented yet!");
@@ -133,6 +135,7 @@ public class UniversityManager implements University {
     throw new RuntimeException("Method 5 not implemented yet!");
   }
 
+  //Przypisywanie wykładowcy do kursu
   @Override
   public void assignLecturerToCourse(String lecturerId, String courseId) {
     for (Course course : Courses) {
@@ -147,14 +150,18 @@ public class UniversityManager implements University {
     //throw new RuntimeException("Method 6 not implemented yet!");
   }
 
+  //Zliczanie ilości studentów przypisanych do kursu
   @Override
   public int getNumberOfStudentsEnrolledInCourse(String courseId) {
+    List <String> listNumberOfStudentsEnrolledInCourse = new ArrayList<>();
     for (Course course : Courses) {
       if (courseId.equals(course.getCourseId())) {
-        return course.getMembers().size();
+        listNumberOfStudentsEnrolledInCourse = course.getMembers();
+        System.out.println(course.getMembers());  //Póki co zwraca pustą listę czyli metoda enrollStudentInCourse nie działa poprawnie
       }
     }
-    throw new RuntimeException("Method 7 not implemented yet!");
+    return listNumberOfStudentsEnrolledInCourse.size();
+    //throw new RuntimeException("Method 7 not implemented yet!");
   }
 
   @Override
@@ -182,12 +189,13 @@ public class UniversityManager implements University {
     throw new RuntimeException("Method 12 not implemented yet!");
   }
 
+  //Wymienianie nazw kursów semestru letniego w zadaniym roku
   @Override
   public List<String> getAllCourseNamesForSummerSemesterByYear(int year) {
     //throw new RuntimeException("Method 13 not implemented yet!");
     List <String> namesOfCoursesForSummerSemesterByYear = new ArrayList<>();
     for (Course course : Courses) {
-      if (year == course.getYear()) {
+      if (year == course.getYear() && course.getSemester() == Semester.SUMMER) {
         namesOfCoursesForSummerSemesterByYear.add(course.getName());
       }
     }
