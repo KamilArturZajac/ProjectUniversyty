@@ -9,9 +9,9 @@ public class Course {
     private int year;
     private Semester semester;
     private String leader;
-    private List <String> members = new ArrayList<>();
+    private ArrayList <String> members = new ArrayList<>();
 
-    public Course(String courseId, String name, int year, Semester semester, String leader, List members) {
+    public Course(String courseId, String name, int year, Semester semester, String leader, ArrayList members) {
         this.courseId = courseId;
         this.name = name;
         this.year = year;
@@ -33,5 +33,5 @@ public class Course {
     public void setYear (int year) { this.year = year; }
     public void setSemester (Semester semester) { this.semester = semester; }
     public void setLeader (String leader) { this.leader = leader; }
-    public void setMembers (String members) { this.members.add(members); }
+    public void setMembers (String member) { this.members.add(member); }
 }

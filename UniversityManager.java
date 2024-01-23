@@ -6,7 +6,7 @@ import java.util.*;
 
 public class UniversityManager implements University {
 
-  //Tworzenie studenta
+  //METODA 1 Tworzenie studenta
   public List <Student> Students = new ArrayList<>();
   @Override
   public String recruitNewStudent(String firstName, String lastName, LocalDate birthDate) {
@@ -42,7 +42,7 @@ public class UniversityManager implements University {
 
 
 
-  //Tworzenie wykładowcy
+  //METODA 2Tworzenie wykładowcy
   public List <Lecturer> Lecturers = new ArrayList<>();
   @Override
   //W poniższej metodzie pozwoliłem zmienić nazwę zmiennej z "birtDate" na "birthDate"
@@ -77,13 +77,13 @@ public class UniversityManager implements University {
     return false;
   }
 
-  //Tworzenie kursu
+  //METODA 3 Tworzenie kursu
   public List <Course> Courses = new ArrayList<>();
   @Override
   public String openNewCourse(String name, int year, Semester semester) {
     String courseId = String.valueOf(courseRandomId());
     String leader = "";
-    List members = Collections.singletonList("");
+    ArrayList members = null;
     Course newCourse = new Course(courseId, name, year, semester, leader, members);
     Courses.add(newCourse);
     return newCourse.getCourseId();
@@ -112,30 +112,26 @@ public class UniversityManager implements University {
     }
     return false;
   }
-//Przypisywanie studenta do kursu
+//METODA 4 Przypisywanie studenta do kursu
   @Override
   public void enrollStudentInCourse(String studentId, String courseId) {
     for (Course course : Courses) {
-      if (courseId.equals(course.getCourseId())) { //IF nie wykonuje się prawidłowo i działa break w elsie
-        for (Student student : Students) {
-          if (studentId.equals(student.getStudentId())) {
-            course.setMembers(studentId);
-            System.out.println("JAKIMŚ CUDEM DZIAŁA");
-            break;
-          } else { break; }
-        }
-        break;
+      if (courseId.equals(course.getCourseId())) {
+        System.out.println(courseId + " " + course.getCourseId());
+        System.out.println(studentId + " chce zostać członkiem kursu " + courseId + ". Pętla znajduje się na kursie " + course.getCourseId());
+            course.setMembers(studentId); //NIE DZIAŁA setMembers
       } else  { break; }
     }
     //throw new RuntimeException("Method 4 not implemented yet!");
   }
 
+  //METODA 5
   @Override
   public void enrollStudentsInCourse(Set<String> studentIds, String courseId) {
     throw new RuntimeException("Method 5 not implemented yet!");
   }
 
-  //Przypisywanie wykładowcy do kursu
+  //METODA 6 Przypisywanie wykładowcy do kursu
   @Override
   public void assignLecturerToCourse(String lecturerId, String courseId) {
     for (Course course : Courses) {
@@ -150,7 +146,7 @@ public class UniversityManager implements University {
     //throw new RuntimeException("Method 6 not implemented yet!");
   }
 
-  //Zliczanie ilości studentów przypisanych do kursu
+  //METODA 7 Zliczanie ilości studentów przypisanych do kursu
   @Override
   public int getNumberOfStudentsEnrolledInCourse(String courseId) {
     List <String> listNumberOfStudentsEnrolledInCourse = new ArrayList<>();
@@ -174,6 +170,7 @@ public class UniversityManager implements University {
     throw new RuntimeException("Method 9 not implemented yet!");
   }
 
+  //METODA 10
   @Override
   public int getNumberOfStudentsNotEnrolledInAnyCourse() {
     throw new RuntimeException("Method 10 not implemented yet!");
@@ -189,7 +186,7 @@ public class UniversityManager implements University {
     throw new RuntimeException("Method 12 not implemented yet!");
   }
 
-  //Wymienianie nazw kursów semestru letniego w zadaniym roku
+  //METODA 13 Wymienianie nazw kursów semestru letniego w zadaniym roku
   @Override
   public List<String> getAllCourseNamesForSummerSemesterByYear(int year) {
     //throw new RuntimeException("Method 13 not implemented yet!");
