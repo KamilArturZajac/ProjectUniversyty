@@ -167,25 +167,21 @@ public class UniversityManager implements University {
   //METODA 10 Zliczanie ilości studentów nie przypisanych do żadnego kursu
   @Override
   public int getNumberOfStudentsNotEnrolledInAnyCourse() {
-    int numberOfStudentsNotEnrolledInAnyCourse = 0;
-    List <String> StudentsEnrolledInAnyCourse = new ArrayList<>();
-    StudentsEnrolledInAnyCourse.add("member");
-    System.out.println("Zawartość listy " + StudentsEnrolledInAnyCourse);
-    for (Course course : Courses) {
-      System.out.println('\n' + "Przeszukiwanie kursu " + course.getName());
-      for (Object member : course.getMembers()){
+    List<String> studentsEnrolledInAnyCourse = new ArrayList<>();
 
-        System.out.println("Wykryto użytkownika " + member);
-        //for (String ignored : StudentsEnrolledInAnyCourse ){
-          System.out.println("Sprawdzanie listy zapisanych studentów");
-          //if (!member.equals(StudentsEnrolledInAnyCourse)) {
-            //System.out.println("Sprawdzanie czy użytkownik " + member + " jest już na liście");
-            StudentsEnrolledInAnyCourse.add(String.valueOf(member));
-            System.out.println("Zawartość listy " + StudentsEnrolledInAnyCourse);
-         // } else { System.out.println("IF SIĘ JEBIE");}
-        //}
+    for (Course course : Courses) {
+      for (Object member : course.getMembers()) {
+        studentsEnrolledInAnyCourse.add(String.valueOf(member));
       }
     }
+
+    int numberOfStudentsNotEnrolledInAnyCourse = 0;
+    for (Student student : Students) {
+      if (!studentsEnrolledInAnyCourse.contains(student.getStudentId())) {
+        numberOfStudentsNotEnrolledInAnyCourse++;
+      }
+    }
+
     return numberOfStudentsNotEnrolledInAnyCourse;
   }
 

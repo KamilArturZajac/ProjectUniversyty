@@ -64,7 +64,7 @@ public class Main {
 
 
         //Sprawdzanie ilu studentów nie jest zapisanych do żadnego kursu
-        System.out.println(universityManager.getNumberOfStudentsNotEnrolledInAnyCourse());
+        System.out.println(universityManager.getNumberOfStudentsNotEnrolledInAnyCourse() + " student/ów nie jest przypisanych do żadnego kursu");
 
 
         //Sprawdzanie ilości studentów, wykładowców i kursów
