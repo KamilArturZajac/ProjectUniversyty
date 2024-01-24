@@ -9,7 +9,7 @@ public class Course {
     private int year;
     private Semester semester;
     private String leader;
-    private ArrayList <String> members = new ArrayList<>();
+    private ArrayList <String> members;
 
     public Course(String courseId, String name, int year, Semester semester, String leader, ArrayList members) {
         this.courseId = courseId;

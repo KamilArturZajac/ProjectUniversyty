@@ -1,6 +1,5 @@
 package pl.wsb.university;
 
-import java.lang.reflect.Member;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -42,7 +41,7 @@ public class UniversityManager implements University {
 
 
 
-  //METODA 2Tworzenie wykładowcy
+  //METODA 2 Tworzenie wykładowcy
   public List <Lecturer> Lecturers = new ArrayList<>();
   @Override
   //W poniższej metodzie pozwoliłem zmienić nazwę zmiennej z "birtDate" na "birthDate"
@@ -83,7 +82,7 @@ public class UniversityManager implements University {
   public String openNewCourse(String name, int year, Semester semester) {
     String courseId = String.valueOf(courseRandomId());
     String leader = "";
-    ArrayList members = null;
+    ArrayList <String> members = new ArrayList<>();
     Course newCourse = new Course(courseId, name, year, semester, leader, members);
     Courses.add(newCourse);
     return newCourse.getCourseId();
@@ -117,12 +116,10 @@ public class UniversityManager implements University {
   public void enrollStudentInCourse(String studentId, String courseId) {
     for (Course course : Courses) {
       if (courseId.equals(course.getCourseId())) {
-        System.out.println(courseId + " " + course.getCourseId());
-        System.out.println(studentId + " chce zostać członkiem kursu " + courseId + ". Pętla znajduje się na kursie " + course.getCourseId());
-            course.setMembers(studentId); //NIE DZIAŁA setMembers
-      } else  { break; }
+        course.setMembers(studentId);
+        break;
+      }
     }
-    //throw new RuntimeException("Method 4 not implemented yet!");
   }
 
   //METODA 5
@@ -143,7 +140,6 @@ public class UniversityManager implements University {
         }
       } else  { break; }
     }
-    //throw new RuntimeException("Method 6 not implemented yet!");
   }
 
   //METODA 7 Zliczanie ilości studentów przypisanych do kursu
@@ -153,11 +149,9 @@ public class UniversityManager implements University {
     for (Course course : Courses) {
       if (courseId.equals(course.getCourseId())) {
         listNumberOfStudentsEnrolledInCourse = course.getMembers();
-        System.out.println(course.getMembers());  //Póki co zwraca pustą listę czyli metoda enrollStudentInCourse nie działa poprawnie
       }
     }
     return listNumberOfStudentsEnrolledInCourse.size();
-    //throw new RuntimeException("Method 7 not implemented yet!");
   }
 
   @Override
@@ -170,10 +164,29 @@ public class UniversityManager implements University {
     throw new RuntimeException("Method 9 not implemented yet!");
   }
 
-  //METODA 10
+  //METODA 10 Zliczanie ilości studentów nie przypisanych do żadnego kursu
   @Override
   public int getNumberOfStudentsNotEnrolledInAnyCourse() {
-    throw new RuntimeException("Method 10 not implemented yet!");
+    int numberOfStudentsNotEnrolledInAnyCourse = 0;
+    List <String> StudentsEnrolledInAnyCourse = new ArrayList<>();
+    StudentsEnrolledInAnyCourse.add("member");
+    System.out.println("Zawartość listy " + StudentsEnrolledInAnyCourse);
+    for (Course course : Courses) {
+      System.out.println('\n' + "Przeszukiwanie kursu " + course.getName());
+      for (Object member : course.getMembers()){
+
+        System.out.println("Wykryto użytkownika " + member);
+        //for (String ignored : StudentsEnrolledInAnyCourse ){
+          System.out.println("Sprawdzanie listy zapisanych studentów");
+          //if (!member.equals(StudentsEnrolledInAnyCourse)) {
+            //System.out.println("Sprawdzanie czy użytkownik " + member + " jest już na liście");
+            StudentsEnrolledInAnyCourse.add(String.valueOf(member));
+            System.out.println("Zawartość listy " + StudentsEnrolledInAnyCourse);
+         // } else { System.out.println("IF SIĘ JEBIE");}
+        //}
+      }
+    }
+    return numberOfStudentsNotEnrolledInAnyCourse;
   }
 
   @Override
@@ -189,7 +202,6 @@ public class UniversityManager implements University {
   //METODA 13 Wymienianie nazw kursów semestru letniego w zadaniym roku
   @Override
   public List<String> getAllCourseNamesForSummerSemesterByYear(int year) {
-    //throw new RuntimeException("Method 13 not implemented yet!");
     List <String> namesOfCoursesForSummerSemesterByYear = new ArrayList<>();
     for (Course course : Courses) {
       if (year == course.getYear() && course.getSemester() == Semester.SUMMER) {
@@ -214,18 +226,34 @@ public class UniversityManager implements University {
     throw new RuntimeException("Method 16 not implemented yet!");
   }
 
+  //METODA 17 Zliczanie ilości studentów
   @Override
   public int getNumberOfAllStudents() {
-    throw new RuntimeException("Method 17 not implemented yet!");
+    int numberOfAllStudents = 0;
+    for (Student student : Students) {
+      numberOfAllStudents++;
+    }
+    return numberOfAllStudents;
   }
 
+  //METODA 18 Zliczanie ilości wykładowców
   @Override
   public int getNumberOfAllLecturers() {
-    throw new RuntimeException("Method 18 not implemented yet!");
+    int numberOfAllLecturers = 0;
+    for (Lecturer lecturer : Lecturers) {
+      numberOfAllLecturers++;
+    }
+    return numberOfAllLecturers;
   }
 
+  //METODA 19 Zliczanie ilości kursów
   @Override
   public int getNumberOfAllCourses() {
-    throw new RuntimeException("Method 19 not implemented yet!");
+    int numberOfAllCourses = 0;
+    for (Course course : Courses) {
+      numberOfAllCourses++;
+    }
+    return numberOfAllCourses;
+
   }
 }

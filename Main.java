@@ -14,12 +14,14 @@ public class Main {
         //Wywoływanie ID studenta 1
         System.out.println("ID studenta 1: " + student1);
 
+
         //Tworzenie przykładowych wykładowców
         String lecturer1 = universityManager.hireNewLecturer("Lucjan", "Puchalski", LocalDate.of(1967, 4, 4));
         String lecturer2 = universityManager.hireNewLecturer("Dorian", "Niemczyk", LocalDate.of(1958, 5, 5));
 
         //Wywoływanie ID wykładowcy 1
         System.out.println("ID wykładowcy 1: " + lecturer1);
+
 
         //Tworzenie przykładowych kursów
         String course1 = universityManager.openNewCourse("Programowanie", 1, Semester.SUMMER);
@@ -29,26 +31,45 @@ public class Main {
 
         //Wywoływanie ID kursu 1
         System.out.println("ID kursu 1: " + course1);
+        System.out.println('\n');
+
 
         //Dodawanie studenta 2 i 3 do kursu 1
         universityManager.enrollStudentInCourse(student3, course1);
         System.out.println(student3 + " is now member of course " + course1);
+
         universityManager.enrollStudentInCourse(student2, course1);
         System.out.println(student2 + " is now member of course " + course1);
-        universityManager.enrollStudentInCourse(student3, course1);
-        System.out.println(student3 + " is now member of course " + course1);
+
+        universityManager.enrollStudentInCourse(student2, course2);
+        System.out.println(student2 + " is now member of course " + course2);
+
 
         //Dodawanie wykładowcy 2 do kursu 1
         universityManager.assignLecturerToCourse(lecturer2, course1);
-        System.out.println(lecturer2 + " is now leader of course " + course1);
+        System.out.println('\n' + lecturer2 + " is now leader of course " + course1);
+        System.out.println('\n');
+
 
         //Sprawdzenie ilości ucześtników kursu 1 NIE DZIAŁA
         int numberOfCourseMembers = universityManager.getNumberOfStudentsEnrolledInCourse(course1);
         System.out.println("Total members of course " + course1 + ": " + numberOfCourseMembers);
+        System.out.println('\n');
+
 
         //Sprawdzanie nazw kursów występujących na pierwszym roku semestru letniego
         List <String> allCoursesNamesForSummerSemesterByYear = universityManager.getAllCourseNamesForSummerSemesterByYear(1);
         System.out.println("Names of summer courses in 1 year " + allCoursesNamesForSummerSemesterByYear);
+        System.out.println('\n');
 
+
+        //Sprawdzanie ilu studentów nie jest zapisanych do żadnego kursu
+        System.out.println(universityManager.getNumberOfStudentsNotEnrolledInAnyCourse());
+
+
+        //Sprawdzanie ilości studentów, wykładowców i kursów
+        System.out.println("Całkowita liczba studentów: " + universityManager.getNumberOfAllStudents());
+        System.out.println("Całkowita liczba wykładowców: " + universityManager.getNumberOfAllLecturers());
+        System.out.println("Całkowita liczba kursów: " + universityManager.getNumberOfAllCourses());
     }
 }
