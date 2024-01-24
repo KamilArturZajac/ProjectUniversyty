@@ -1,0 +1,20 @@
+@Override
+public int getNumberOfStudentsNotEnrolledInAnyCourse() {
+    List<String> studentsEnrolledInAnyCourse = new ArrayList<>();
+
+    for (Course course : Courses) {
+        for (Object member : course.getMembers()) {
+            studentsEnrolledInAnyCourse.add(String.valueOf(member));
+        }
+    }
+
+    int numberOfStudentsNotEnrolledInAnyCourse = 0;
+    for (Student student : Students) {
+        String studentId = String.valueOf(student.getId());
+        if (!studentsEnrolledInAnyCourse.contains(studentId)) {
+            numberOfStudentsNotEnrolledInAnyCourse++;
+        }
+    }
+
+    return numberOfStudentsNotEnrolledInAnyCourse;
+}
