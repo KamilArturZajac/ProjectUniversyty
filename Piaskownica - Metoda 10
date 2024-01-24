@@ -37,8 +37,7 @@ public int getNumberOfStudentsNotEnrolledInAnyCourse() {
 
     int numberOfStudentsNotEnrolledInAnyCourse = 0;
     for (Student student : Students) {
-        String studentId = String.valueOf(student.getId());
-        if (!studentsEnrolledInAnyCourse.contains(studentId)) {
+        if (!studentsEnrolledInAnyCourse.contains(student.getId())) {
             numberOfStudentsNotEnrolledInAnyCourse++;
         }
     }
