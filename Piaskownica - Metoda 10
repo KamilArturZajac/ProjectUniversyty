@@ -44,3 +44,13 @@ public int getNumberOfStudentsNotEnrolledInAnyCourse() {
 
     return numberOfStudentsNotEnrolledInAnyCourse;
 }
+        Set<String> studentsList = new HashSet<>();
+        studentsList.add(student1);
+        studentsList.add(student2);
+        studentsList.add(student3);
+        //universityManager.enrollStudentsInCourse(studentsList, course1); // Student already enrolled
+        //universityManager.enrollStudentsInCourse(studentsList, "1111"); // unknown course
+        Set<String> studentsList2 = new HashSet<>();
+        studentsList2.add("2222");
+        studentsList2.add(student1);
+        universityManager.enrollStudentsInCourse(studentsList2, course4); // unknown student
