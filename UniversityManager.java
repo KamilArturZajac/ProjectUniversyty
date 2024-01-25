@@ -5,7 +5,7 @@ import java.util.*;
 
 public class UniversityManager implements University {
 
-  //METODA 1 Tworzenie studenta
+          //METODA 1 Tworzenie studenta
   public List <Student> Students = new ArrayList<>();
   @Override
   public String recruitNewStudent(String firstName, String lastName, LocalDate birthDate) {
@@ -41,7 +41,7 @@ public class UniversityManager implements University {
 
 
 
-  //METODA 2 Tworzenie wykładowcy
+          //METODA 2 Tworzenie wykładowcy
   public List <Lecturer> Lecturers = new ArrayList<>();
   @Override
   //W poniższej metodzie pozwoliłem zmienić nazwę zmiennej z "birtDate" na "birthDate"
@@ -76,7 +76,7 @@ public class UniversityManager implements University {
     return false;
   }
 
-  //METODA 3 Tworzenie kursu
+          //METODA 3 Tworzenie kursu
   public List <Course> Courses = new ArrayList<>();
   @Override
   public String openNewCourse(String name, int year, Semester semester) {
@@ -111,38 +111,74 @@ public class UniversityManager implements University {
     }
     return false;
   }
-//METODA 4 Przypisywanie studenta do kursu
+
+        //METODA 4 Przypisywanie studenta do kursu
+@Override
+public void enrollStudentInCourse(String studentId, String courseId) throws CourseNotFoundException, PersonNotFoundException, StudentAlreadyEnrolledException {
+  if (!VerificationMethods.verifyIfCourseIdFound(courseId, Courses)){
+    throw new CourseNotFoundException("Kurs " + courseId + " nie istnieje");
+  }
+  if (!VerificationMethods.verifyIfStudentIdFound(studentId, Students)){
+    throw new PersonNotFoundException("Student " + studentId + " nie istnieje");
+  }
+  for (Course course : Courses) {
+    if (courseId.equals(course.getCourseId())) {
+      if (course.getMembers().contains(studentId)){
+        throw new StudentAlreadyEnrolledException("Student " + studentId + " jest już zapisany na kurs " + courseId);
+      } else {
+        course.setMembers(studentId);
+      }
+      break;
+    }
+  }
+}
+
+          //METODA 5 Przypisywanie studentów do kursu
   @Override
-  public void enrollStudentInCourse(String studentId, String courseId) {
+  public void enrollStudentsInCourse(Set<String> studentIds, String courseId) throws CourseNotFoundException, StudentAlreadyEnrolledException, PersonNotFoundException {
+    if (!VerificationMethods.verifyIfCourseIdFound(courseId, Courses)){
+      throw new CourseNotFoundException("Kurs " + courseId + " istnieje");
+    }
+    List<String> studentIdsList = new ArrayList<>(studentIds);
+    for (String studentId : studentIdsList) {
+      if (!VerificationMethods.verifyIfStudentIdFound(studentId, Students)){
+        throw new PersonNotFoundException("Student " + studentId + " nie istnieje");
+      }
+      for (Course course : Courses) {
+        if (courseId.equals(course.getCourseId())) {
+          if (course.getMembers().contains(studentId)){
+            throw new StudentAlreadyEnrolledException("Student " + studentId + " jest już zapisany na kurs " + courseId);
+          } else {
+            course.setMembers(studentId);
+          }
+          break;
+        }
+      }
+    }
+  }
+
+          //METODA 6 Przypisywanie wykładowcy do kursu
+  @Override
+  public void assignLecturerToCourse(String lecturerId, String courseId) throws CourseNotFoundException, PersonNotFoundException, LecturerAlreadyAssignedException {
+    if (!VerificationMethods.verifyIfCourseIdFound(courseId, Courses)){
+      throw new CourseNotFoundException("Kurs " + courseId + " nie istnieje");
+    }
+    if (!VerificationMethods.verifyIfLecturerIdFound(lecturerId, Lecturers)){
+      throw new PersonNotFoundException("Wykładowca " + lecturerId + " nie istnieje");
+    }
     for (Course course : Courses) {
       if (courseId.equals(course.getCourseId())) {
-        course.setMembers(studentId);
+        if (course.getMembers().contains(lecturerId)){
+          throw new LecturerAlreadyAssignedException("Wykładowca " + lecturerId + " jest już prowadzącym kursu " + courseId);
+        } else {
+          course.setMembers(lecturerId);
+        }
         break;
       }
     }
   }
 
-  //METODA 5
-  @Override
-  public void enrollStudentsInCourse(Set<String> studentIds, String courseId) {
-    throw new RuntimeException("Method 5 not implemented yet!");
-  }
-
-  //METODA 6 Przypisywanie wykładowcy do kursu
-  @Override
-  public void assignLecturerToCourse(String lecturerId, String courseId) {
-    for (Course course : Courses) {
-      if (courseId.equals(course.getCourseId())) {
-        for (Lecturer lecturer : Lecturers) {
-          if (lecturerId.equals(lecturer.getLecturerId())) {
-            course.setLeader(lecturerId);
-          } else { break; }
-        }
-      } else  { break; }
-    }
-  }
-
-  //METODA 7 Zliczanie ilości studentów przypisanych do kursu
+          //METODA 7 Zliczanie ilości studentów przypisanych do kursu
   @Override
   public int getNumberOfStudentsEnrolledInCourse(String courseId) {
     List <String> listNumberOfStudentsEnrolledInCourse = new ArrayList<>();
@@ -164,7 +200,7 @@ public class UniversityManager implements University {
     throw new RuntimeException("Method 9 not implemented yet!");
   }
 
-  //METODA 10 Zliczanie ilości studentów nie przypisanych do żadnego kursu
+        //METODA 10 Zliczanie ilości studentów nie przypisanych do żadnego kursu
   @Override
   public int getNumberOfStudentsNotEnrolledInAnyCourse() {
     List<String> studentsEnrolledInAnyCourse = new ArrayList<>();
@@ -195,7 +231,7 @@ public class UniversityManager implements University {
     throw new RuntimeException("Method 12 not implemented yet!");
   }
 
-  //METODA 13 Wymienianie nazw kursów semestru letniego w zadaniym roku
+          //METODA 13 Wymienianie nazw kursów semestru letniego w zadaniym roku
   @Override
   public List<String> getAllCourseNamesForSummerSemesterByYear(int year) {
     List <String> namesOfCoursesForSummerSemesterByYear = new ArrayList<>();
@@ -222,7 +258,7 @@ public class UniversityManager implements University {
     throw new RuntimeException("Method 16 not implemented yet!");
   }
 
-  //METODA 17 Zliczanie ilości studentów
+          //METODA 17 Zliczanie ilości studentów
   @Override
   public int getNumberOfAllStudents() {
     int numberOfAllStudents = 0;
@@ -232,7 +268,7 @@ public class UniversityManager implements University {
     return numberOfAllStudents;
   }
 
-  //METODA 18 Zliczanie ilości wykładowców
+          //METODA 18 Zliczanie ilości wykładowców
   @Override
   public int getNumberOfAllLecturers() {
     int numberOfAllLecturers = 0;
@@ -242,7 +278,7 @@ public class UniversityManager implements University {
     return numberOfAllLecturers;
   }
 
-  //METODA 19 Zliczanie ilości kursów
+         //METODA 19 Zliczanie ilości kursów
   @Override
   public int getNumberOfAllCourses() {
     int numberOfAllCourses = 0;
