@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class StudentTest {
     private UniversityManager universityManager;
-    private Student student;
+    private String studentId; // ID studenta, które zwraca metoda recruitNewStudent
 
     @BeforeEach
     void setUp() {
@@ -18,7 +18,7 @@ public class StudentTest {
     }
 
     void createStudent() {
-        student = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(1995, 5, 5));
+        studentId = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(1995, 5, 5));
     }
 
     @Test
@@ -26,6 +26,7 @@ public class StudentTest {
     void getFirstName() {
         // given
         // when
+        Student student = universityManager.getStudentById(studentId); // Pobierz obiekt Student na podstawie ID
         String firstName = student.getFirstName();
         // then
         Assertions.assertEquals("firstName", firstName);
