@@ -8,23 +8,33 @@ import pl.wsb.university.UniversityManager;
 import java.time.LocalDate;
 
 public class StudentTest {
-    private UniversityManager universityManager;
-    private Student student;
+    private final UniversityManager universityManager = new UniversityManager();
 
     @BeforeEach
     void createStudent() {
-        universityManager = new UniversityManager();
-        student = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(1995, 5, 5));
+        String studentTest1 = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(1995, 5, 5));
+        String studentTest2 = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(1888, 5, 5));
+        String studentTest3 = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(2100, 5, 5));
+        String studentTest4 = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(2000, 15, 5));
+        String studentTest5 = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(2000, 5, 45));
     }
 
     @Test
-    @DisplayName("Sprawdź imię nowego studenta")
+    @DisplayName("Sprawdź imię studenta")
     void getFirstName() {
-        // given
+        // given - kilka studentów
         // when
-        Student retrievedStudent = universityManager.getStudentById(student.getStudentId()); // Pobierz obiekt Student na podstawie ID
-        String firstName = retrievedStudent.getFirstName();
+        String firstName = Student.getFirstName();
         // then
         Assertions.assertEquals("firstName", firstName);
+    }
+    @Test
+    @DisplayName("Sprawdź nazwisko studenta")
+    void getLastName() {
+        // given - kilka studentów
+        // when
+        String lastName = Student.getLastName();
+        // then
+        Assertions.assertEquals("lastName", lastName);
     }
 }
