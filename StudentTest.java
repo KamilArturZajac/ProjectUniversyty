@@ -20,8 +20,7 @@ public class StudentTest {
     void getFirstName() {
         // given
         // when
-        System.out.println("ID of student 1: " + student);
-        Student student = universityManager.getStudentById(studentId); // Pobierz obiekt Student na podstawie ID
+        universityManager.getStudentById(student); // Pobierz obiekt Student na podstawie ID
         String firstName = student.getFirstName();
         // then
         Assertions.assertEquals("firstName", firstName);
