@@ -4,30 +4,38 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pl.wsb.university.Class.Student;
 import pl.wsb.university.UniversityManager;
-import pl.wsb.university.Main;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentTest {
+    private UniversityManager universityManager;
+    private List<Student> students;
+
     @BeforeEach
-    UniversityManager universityManager = new UniversityManager();
-    public List<Student> Students = new ArrayList<>();
-    void createStudent() {
-        String student = universityManager.recruitNewStudent("Jan", "Kowalski", LocalDate.of(1991, 1, 1));
-        //Student newStudent = new Student("studentId","FirstName", "LastName", LocalDate.of(2137, 13, 41));
-        //Students.add(newStudent);
+    void setUp() {
+        universityManager = new UniversityManager();
+        students = new ArrayList<>();
+        createStudent();
     }
+
+    void createStudent() {
+        Student newStudent = universityManager.recruitNewStudent("Jan", "Kowalski", LocalDate.of(1991, 1, 1));
+        students.add(newStudent);
+    }
+
     @Test
-    @DisplayName("Check new student name'")
+    @DisplayName("Sprawdź imię nowego studenta")
     void getFirstName() {
-        // given -
+        // given
+        Student student = students.get(0);
+
         // when
-        String firstName;
-        student.getStudentId();
-        System.out.println("ID of student 1: " + student);
+        String firstName = student.getFirstName();
+        System.out.println("ID studenta 1: " + student.getStudentId());
+
         // then
-        Assertions.assertEquals("FirstName", firstName);
+        Assertions.assertEquals("Jan", firstName);
     }
 }
