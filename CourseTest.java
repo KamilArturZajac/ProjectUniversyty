@@ -6,60 +6,70 @@ import pl.wsb.university.Class.Course;
 import pl.wsb.university.Class.Semester;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CourseTest {
     private Course course;
 
     @BeforeEach
     void createCourse() {
-        // Przykładowa lista studentów
         List<String> members = new ArrayList<>();
         members.add("Student1");
         members.add("Student2");
         members.add("Student3");
         members.add("Student4");
         members.add("Student5");
-
-        // Utworzenie kursu z listą studentów
-        course = new Course("courseId", "name", 1, Semester.SUMMER, "leader", members);
+        course = new Course("courseId", "name", 1, Semester.SUMMER, "leader", (ArrayList) members);
     }
 
     @Test
-    @DisplayName("Sprawdź ID studenta")
+    @DisplayName("Sprawdź ID kursu")
     void getId() {
-        //given - obiekt student z testowymi parametrami
+        //given - obiekt kurs z testowymi parametrami
         // when
-        String ID = student.getStudentId();
+        String ID = course.getCourseId();
         // then
-        Assertions.assertEquals("studentId", ID);
+        Assertions.assertEquals("courseId", ID);
     }
     @Test
-    @DisplayName("Sprawdź imię studenta")
-    void getFirstName() {
-        //given - obiekt student z testowymi parametrami
+    @DisplayName("Sprawdź nazwę kursu")
+    void getName() {
+        //given - obiekt kurs z testowymi parametrami
         // when
-        String firstName = student.getFirstName();
+        String name = course.getName();
         // then
-        Assertions.assertEquals("firstName", firstName);
-    }
-
-    @Test
-    @DisplayName("Sprawdź nazwisko studenta")
-    void getLastName() {
-        //given - obiekt student z testowymi parametrami
-        // when
-        String lastName = student.getLastName();
-        // then
-        Assertions.assertEquals("lastName", lastName);
+        Assertions.assertEquals("name", name);
     }
 
     @Test
-    @DisplayName("Sprawdź datę urodzenia studenta")
-    void getBirthDate() {
-        //given - obiekt student z testowymi parametrami
+    @DisplayName("Sprawdź na którym roku jest kurs")
+    void getYear() {
+        //given - obiekt kurs z testowymi parametrami
         // when
-        LocalDate birthDate = student.getBirthDate();
+        int year = course.getYear();
         // then
-        Assertions.assertEquals(LocalDate.of(1995, 5, 5), birthDate);
+        Assertions.assertEquals(1, year);
+    }
+
+    @Test
+    @DisplayName("Sprawdź semestr kursu")
+    void getSemestr() {
+        //given - obiekt kurs z testowymi parametrami
+        // when
+        Semester semester = course.getSemester();
+        // then
+        Assertions.assertEquals(Semester.SUMMER, semester);
+    }
+
+    @Test
+    @DisplayName("Sprawdź listę uczestników kursu")
+    void getMembers() {
+        //given - obiekt kurs z testowymi parametrami
+        // when
+        List<String> testMembers = new ArrayList<>();
+         testMembers = course.getMembers();
+        // then
+        Assertions.assertEquals("[Student1, Student2, Student3, Student4, Student5]", testMembers);
     }
 }
