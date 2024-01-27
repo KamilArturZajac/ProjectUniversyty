@@ -1,4 +1,4 @@
-package pl.wsb.university;
+package pl.wsb.university.Class;
 
 public enum Semester {
   SUMMER,

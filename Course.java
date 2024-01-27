@@ -1,4 +1,4 @@
-package pl.wsb.university;
+package pl.wsb.university.Class;
 
 import java.util.ArrayList;
 import java.util.List;
