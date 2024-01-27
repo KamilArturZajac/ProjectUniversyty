@@ -65,11 +65,10 @@ public class CourseTest {
     @Test
     @DisplayName("Sprawdź listę uczestników kursu")
     void getMembers() {
-        //given - obiekt kurs z testowymi parametrami
+        // given - obiekt kurs z testowymi parametrami
         // when
-        List<String> testMembers = new ArrayList<>();
-         testMembers = course.getMembers();
+        List<String> testMembers = course.getMembers();
         // then
-        Assertions.assertEquals("[Student1, Student2, Student3, Student4, Student5]", testMembers);
+        Assertions.assertTrue(testMembers.containsAll(members));
     }
 }
