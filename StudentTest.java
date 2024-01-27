@@ -6,15 +6,19 @@ import pl.wsb.university.Class.Student;
 import pl.wsb.university.UniversityManager;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class StudentTest {
+    private UniversityManager universityManager;
+    private Student student;
 
     @BeforeEach
+    void setUp() {
+        universityManager = new UniversityManager();
+        createStudent();
+    }
 
     void createStudent() {
-        String student1 = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(1995, 5, 5));
+        student = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(1995, 5, 5));
     }
 
     @Test
@@ -24,6 +28,6 @@ public class StudentTest {
         // when
         String firstName = student.getFirstName();
         // then
-        Assertions.assertEquals("Jan", firstName);
+        Assertions.assertEquals("firstName", firstName);
     }
 }
