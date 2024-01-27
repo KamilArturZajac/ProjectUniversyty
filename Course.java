@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Course {
-    private String courseId;
-    private String name;
-    private int year;
-    private Semester semester;
-    private String leader;
-    private ArrayList <String> members;
+    private static String courseId;
+    private static String name;
+    private static int year;
+    private static Semester semester;
+    private static String leader;
+    private static ArrayList <String> members;
 
     public Course(String courseId, String name, int year, Semester semester, String leader, ArrayList members) {
         this.courseId = courseId;
@@ -20,12 +20,12 @@ public class Course {
         this.members = members;
     }
     //GETTERY
-    public String getCourseId() { return courseId; }
-    public String getName() { return name; }
-    public int getYear() { return year; }
-    public Semester getSemester() { return semester; }
-    public String getLeader() { return leader; }
-    public List getMembers() { return members; }
+    public static String getCourseId() { return courseId; }
+    public static String getName() { return name; }
+    public static int getYear() { return year; }
+    public static Semester getSemester() { return semester; }
+    public static String getLeader() { return leader; }
+    public static List getMembers() { return members; }
 
     //SETTERY
     public void setCourseId (String courseId) { this.courseId = courseId;}

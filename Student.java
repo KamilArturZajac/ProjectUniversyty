@@ -3,10 +3,10 @@ package pl.wsb.university.Class;
 import java.time.LocalDate;
 
 public class Student {
-    private String studentId;
-    private String firstName;
-    private String lastName;
-    private LocalDate birthDate;
+    private static String studentId;
+    private static String firstName;
+    private static String lastName;
+    private static LocalDate birthDate;
     public Student(String studentId, String firstName, String lastName, LocalDate birthDate) {
         this.studentId = studentId;
         this.firstName = firstName;
@@ -15,10 +15,10 @@ public class Student {
     }
 
     //GETTERY
-    public String getStudentId() { return studentId; }
-    public String getFirstName() { return firstName; }
-    public String getLastName() { return lastName; }
-    public LocalDate getBirthDate() { return birthDate; }
+    public static String getStudentId() { return studentId; }
+    public static String getFirstName() { return firstName; }
+    public static String getLastName() { return lastName; }
+    public static LocalDate getBirthDate() { return birthDate; }
 
     //Settery
     public void setStudentId (String studentId) { this.studentId = studentId; }
