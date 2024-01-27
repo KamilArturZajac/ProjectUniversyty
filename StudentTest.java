@@ -8,11 +8,13 @@ import pl.wsb.university.UniversityManager;
 import java.time.LocalDate;
 
 public class StudentTest {
+    private UniversityManager universityManager;
+    private Student student;
 
     @BeforeEach
     void createStudent() {
-        UniversityManager universityManager = new UniversityManager();
-        String student = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(1995, 5, 5));
+        universityManager = new UniversityManager();
+        student = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(1995, 5, 5));
     }
 
     @Test
@@ -20,8 +22,8 @@ public class StudentTest {
     void getFirstName() {
         // given
         // when
-        universityManager.getStudentById(student); // Pobierz obiekt Student na podstawie ID
-        String firstName = student.getFirstName();
+        Student retrievedStudent = universityManager.getStudentById(student.getStudentId()); // Pobierz obiekt Student na podstawie ID
+        String firstName = retrievedStudent.getFirstName();
         // then
         Assertions.assertEquals("firstName", firstName);
     }
