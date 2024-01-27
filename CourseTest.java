@@ -11,8 +11,17 @@ public class CourseTest {
     private Course course;
 
     @BeforeEach
-    void createStudent() {
-        course = new Course("courseId", "name", 1, Semester.SUMMER, "leader", ));
+    void createCourse() {
+        // Przykładowa lista studentów
+        List<String> members = new ArrayList<>();
+        members.add("Student1");
+        members.add("Student2");
+        members.add("Student3");
+        members.add("Student4");
+        members.add("Student5");
+
+        // Utworzenie kursu z listą studentów
+        course = new Course("courseId", "name", 1, Semester.SUMMER, "leader", members);
     }
 
     @Test
