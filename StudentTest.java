@@ -8,17 +8,11 @@ import pl.wsb.university.UniversityManager;
 import java.time.LocalDate;
 
 public class StudentTest {
-    private UniversityManager universityManager;
-    private String studentId; // ID studenta, które zwraca metoda recruitNewStudent
 
     @BeforeEach
-    void setUp() {
-        universityManager = new UniversityManager();
-        createStudent();
-    }
-
     void createStudent() {
-        studentId = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(1995, 5, 5));
+        UniversityManager universityManager = new UniversityManager();
+        String student = universityManager.recruitNewStudent("firstName", "lastName", LocalDate.of(1995, 5, 5));
     }
 
     @Test
@@ -26,6 +20,7 @@ public class StudentTest {
     void getFirstName() {
         // given
         // when
+        System.out.println("ID of student 1: " + student);
         Student student = universityManager.getStudentById(studentId); // Pobierz obiekt Student na podstawie ID
         String firstName = student.getFirstName();
         // then
