@@ -1,0 +1,80 @@
+import org.junit.jupiter.api.Test;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import static org.junit.jupiter.api.Assertions.*;
+
+class UniversityManagerTest {
+
+    @Test
+    void testRecruitNewStudent() {
+        UniversityManager universityManager = new UniversityManager();
+
+        String studentId = universityManager.recruitNewStudent("John", "Doe", LocalDate.of(1995, 1, 1));
+
+        assertNotNull(studentId);
+        assertEquals(1, universityManager.Students.size());
+    }
+
+    @Test
+    void testHireNewLecturer() {
+        UniversityManager universityManager = new UniversityManager();
+
+        String lecturerId = universityManager.hireNewLecturer("Jane", "Smith", LocalDate.of(1980, 5, 5));
+
+        assertNotNull(lecturerId);
+        assertEquals(1, universityManager.Lecturers.size());
+    }
+
+    @Test
+    void testOpenNewCourse() {
+        UniversityManager universityManager = new UniversityManager();
+
+        String courseId = universityManager.openNewCourse("Math", 2024, Semester.SUMMER);
+
+        assertNotNull(courseId);
+        assertEquals(1, universityManager.Courses.size());
+    }
+
+    @Test
+    void testEnrollStudentInCourse() {
+        UniversityManager universityManager = new UniversityManager();
+        String studentId = universityManager.recruitNewStudent("John", "Doe", LocalDate.of(1995, 1, 1));
+        String courseId = universityManager.openNewCourse("Math", 2024, Semester.SUMMER);
+
+        assertDoesNotThrow(() -> universityManager.enrollStudentInCourse(studentId, courseId));
+        assertEquals(1, universityManager.getNumberOfStudentsEnrolledInCourse(courseId));
+    }
+
+    @Test
+    void testEnrollStudentsInCourse() {
+        UniversityManager universityManager = new UniversityManager();
+        Set<String> studentIds = new HashSet<>(Arrays.asList(
+                universityManager.recruitNewStudent("John", "Doe", LocalDate.of(1995, 1, 1)),
+                universityManager.recruitNewStudent("Jane", "Doe", LocalDate.of(1990, 5, 5))
+        ));
+        String courseId = universityManager.openNewCourse("Math", 2024, Semester.SUMMER);
+
+        assertDoesNotThrow(() -> universityManager.enrollStudentsInCourse(studentIds, courseId));
+        assertEquals(2, universityManager.getNumberOfStudentsEnrolledInCourse(courseId));
+    }
+
+    @Test
+    void testGetNumberOfStudentsNotEnrolledInAnyCourse() {
+        UniversityManager universityManager = new UniversityManager();
+        universityManager.recruitNewStudent("John", "Doe", LocalDate.of(1995, 1, 1));
+
+        assertEquals(1, universityManager.getNumberOfStudentsNotEnrolledInAnyCourse());
+    }
+
+    @Test
+    void testGetNumberOfAllStudents() {
+        UniversityManager universityManager = new UniversityManager();
+        universityManager.recruitNewStudent("John", "Doe", LocalDate.of(1995, 1, 1));
+
+        assertEquals(1, universityManager.getNumberOfAllStudents());
+    }
+
+    // ... Dodaj testy dla pozostałych metod ...
+}
